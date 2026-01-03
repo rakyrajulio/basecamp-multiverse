@@ -38,19 +38,16 @@
       </div>
 
       <ul class="hidden md:flex space-x-4 ml-auto">
-  <li><a href="#home" class="hover:text-blue-500">Home</a></li>
-  <li><a href="#features" class="hover:text-blue-500">Fitur</a></li>
+  <li><a href="#home" class="nav-link">Home</a></li>
+  <li><a href="#features" class="nav-link">Fitur</a></li>
   <li>
-    <span
-  class="relative text-gray-400 cursor-not-allowed select-none coming-soon">
-  Toko
-  <span class="absolute -top-2 -right-4 text-[10px]
-    bg-indigo-500 text-white px-1 rounded animate-pulse">
-    Soon
-  </span>
-</span>
+    <span class="relative text-gray-400 cursor-not-allowed select-none">
+      Toko
+      <span class="absolute -top-2 -right-4 text-[10px]
+        bg-indigo-500 text-white px-1 rounded animate-pulse">Soon</span>
+    </span>
   </li>
-  <li><a href="#community" class="hover:text-blue-500">Komunitas</a></li>
+  <li><a href="#community" class="nav-link">Komunitas</a></li>
 </ul>
 
 <button id="themeToggle" class="ml-6 px-2 py-1 border rounded">🌙</button>
@@ -59,17 +56,16 @@
 </nav>
 
 <div id="mobileMenu" class="hidden md:hidden ...">
-  <a href="#home" class="px-2 py-1 rounded hover:text-blue-500">Home</a>
-  <a href="#features" class="px-2 py-1 rounded hover:text-blue-500">Fitur</a>
-  <span
-  class="relative text-gray-400 cursor-not-allowed select-none coming-soon">
-  Toko
-  <span class="absolute -top-1 -right-4 text-[10px]
-    bg-indigo-500 text-white px-1 rounded animate-pulse">
-    Soon
+  <a href="#home" class="nav-link">Home</a>
+  <a href="#features" class="nav-link">Fitur</a>
+
+  <span class="relative text-gray-400 cursor-not-allowed select-none">
+    Toko
+    <span class="absolute -top-1 -right-3 text-[10px]
+      bg-indigo-500 text-white px-1 rounded animate-pulse">Soon</span>
   </span>
-</span>
-  <a href="#community" class="px-2 py-1 rounded hover:text-blue-500">Komunitas</a>
+
+  <a href="#community" class="nav-link">Komunitas</a>
 </div>
 </header>
 
@@ -301,6 +297,37 @@
   document.querySelectorAll('.mobile-link').forEach(link => {
     link.onclick = () => mobileMenu.classList.add('hidden');
   });
+
+  const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('section[id]');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 120;
+    if (scrollY >= sectionTop) {
+      current = section.getAttribute('id');
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) {
+      link.classList.add('active');
+    }
+  });
+});
+
+  document.querySelectorAll('.coming-soon').forEach(el => {
+  el.addEventListener('click', () => {
+    el.classList.add('active');
+
+    setTimeout(() => {
+      el.classList.remove('active');
+    }, 400);
+  });
+});
 </script>
 
 <style>
@@ -353,18 +380,34 @@
 
 .coming-soon.active {
   animation: shake 0.4s;
-  color: #a5b4fc; /* indigo-300 */
+  color: #a5b4fc; 
 }
 
-  document.querySelectorAll('.coming-soon').forEach(el => {
-  el.addEventListener('click', () => {
-    el.classList.add('active');
+      .nav-link {
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.3s ease;
+}
 
-    setTimeout(() => {
-      el.classList.remove('active');
-    }, 400);
-  });
-});
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: #6366f1; /* indigo */
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: #a5b4fc;
+}
 </style>
 
 
