@@ -307,6 +307,16 @@ window.addEventListener('scroll', () => {
     }, 400);
   });
 });
+
+  document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (!target) return;
+
+    target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
 </script>
 
 <style>
