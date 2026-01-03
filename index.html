@@ -41,13 +41,14 @@
   <li><a href="#home" class="hover:text-blue-500">Home</a></li>
   <li><a href="#features" class="hover:text-blue-500">Fitur</a></li>
   <li>
-    <span class="relative text-gray-400 cursor-not-allowed select-none">
-      Toko
-      <span class="absolute -top-2 -right-4 text-[10px]
-        bg-indigo-500 text-white px-1 rounded animate-pulse">
-        Soon
-      </span>
-    </span>
+    <span
+  class="relative text-gray-400 cursor-not-allowed select-none coming-soon">
+  Toko
+  <span class="absolute -top-2 -right-4 text-[10px]
+    bg-indigo-500 text-white px-1 rounded animate-pulse">
+    Soon
+  </span>
+</span>
   </li>
   <li><a href="#community" class="hover:text-blue-500">Komunitas</a></li>
 </ul>
@@ -60,13 +61,14 @@
 <div id="mobileMenu" class="hidden md:hidden ...">
   <a href="#home" class="px-2 py-1 rounded hover:text-blue-500">Home</a>
   <a href="#features" class="px-2 py-1 rounded hover:text-blue-500">Fitur</a>
-  <span class="relative text-gray-400 cursor-not-allowed select-none">
-    Toko
-    <span class="absolute -top-1 -right-4 text-[10px]
-      bg-indigo-500 text-white px-1 rounded animate-pulse">
-      Soon
-    </span>
+  <span
+  class="relative text-gray-400 cursor-not-allowed select-none coming-soon">
+  Toko
+  <span class="absolute -top-1 -right-4 text-[10px]
+    bg-indigo-500 text-white px-1 rounded animate-pulse">
+    Soon
   </span>
+</span>
   <a href="#community" class="px-2 py-1 rounded hover:text-blue-500">Komunitas</a>
 </div>
 </header>
@@ -340,6 +342,29 @@
 .btn-indigo:hover {
   transform: scale(1.05);
 }
+  
+  @keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
+.coming-soon.active {
+  animation: shake 0.4s;
+  color: #a5b4fc; /* indigo-300 */
+}
+
+  document.querySelectorAll('.coming-soon').forEach(el => {
+  el.addEventListener('click', () => {
+    el.classList.add('active');
+
+    setTimeout(() => {
+      el.classList.remove('active');
+    }, 400);
+  });
+});
 </style>
 
 
